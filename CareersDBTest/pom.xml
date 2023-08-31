@@ -9,13 +9,13 @@
   <version>0.0.1-SNAPSHOT</version>
 
   <name>CareersDBTest</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+
+  <url>https://careers.db.com/</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
 
@@ -26,24 +26,22 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>selenium-java</artifactId>
     <version>4.11.0</version>
 </dependency>
-<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 <dependency>
     <groupId>org.testng</groupId>
     <artifactId>testng</artifactId>
     <version>7.8.0</version>
     <scope>test</scope>
 </dependency>
-<!-- https://mvnrepository.com/artifact/org.webjars.npm/webdriver-manager -->
+
 <dependency>
-    <groupId>org.webjars.npm</groupId>
-    <artifactId>webdriver-manager</artifactId>
-    <version>13.0.0-beta</version>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-java</artifactId>
+    <version>7.13.0</version>
 </dependency>
 
   </dependencies>
