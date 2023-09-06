@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
+    <classes>
+      <class name="StepDefinitions.CareersTests">
+        <methods>
+          <include name="location_is_set_to_and_job_type_to"/>
+          <include name="job_listings_page_should_open_with_jobs_listings_without_any_filter"/>
+          <include name="next_page_of_search_results_should_be_displayed"/>
+          <include name="user_hovers_over_professionals_nav_and_clicks_on_search_roles"/>
+          <include name="user_clicks_on_a_search_result"/>
+          <include name="search_button_is_clicked"/>
+          <include name="the_count_of_displayed_search_results_should_match_the_actual_number_of_results"/>
+          <include name="search_button_is_clicked_now"/>
+          <include name="user_is_on_search_roles_page"/>
+          <include name="is_started"/>
+          <include name="deutsche_bank_home_page_is_displayed"/>
+          <include name="user_enters_role_title_and_job_keyword_and_clicks_search_button"/>
+          <include name="job_listings_should_be_filtered_based_on_the_selected_criteria"/>
+          <include name="search_is_left_empty"/>
+          <include name="search_results_are_listed_in_more_than_one_page"/>
+          <include name="relevant_job_listings_that_match_both_keywords_should_be_displayed"/>
+          <include name="user_clicks_on_search_button"/>
+          <include name="user_clicks_on_the_next_button"/>
+          <include name="user_enters_in_the_role_title_field"/>
+          <include name="user_entered_keyword_in_the_search_bar"/>
+          <include name="user_scrolls_to_the_bottom_of_the_search_results_page"/>
+          <include name="user_launches_the_deutsche_bank_website"/>
+          <include name="the_search_results_should_be_cleared_and_return_to_the_default_view"/>
+          <include name="user_clicks_on_the_reset_button"/>
+          <include name="user_is_on_search_roles_form"/>
+          <include name="user_navigates_to_search_roles_page"/>
+          <include name="user_enters_in_the_job_ID_keyword_field"/>
+          <include name="the_job_details_page_should_display_accurate_information_about_the_selected_job_listing"/>
+          <include name="search_results_are_displayed_containing_the_keyword"/>
+          <include name="user_is_on_careers_page"/>
+          <include name="a_search_has_been_performed"/>
+        </methods>
+      </class> <!-- StepDefinitions.CareersTests -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

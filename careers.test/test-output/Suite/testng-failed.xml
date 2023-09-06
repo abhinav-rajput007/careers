@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="ChromeTest(failed)">
+    <parameter name="browsr" value="Chrome"/>
+    <classes>
+      <class name="StepDefinitions.CareersTests">
+        <methods>
+          <include name="tidyUp"/>
+          <include name="user_hovers_over_professionals_nav_and_clicks_on_search_roles"/>
+          <include name="user_is_on_search_roles_form"/>
+          <include name="search_button_is_clicked"/>
+          <include name="location_is_set_to_and_job_type_to"/>
+          <include name="user_enters_in_the_job_ID_keyword_field"/>
+          <include name="search_results_are_displayed_containing_the_keyword"/>
+          <include name="user_is_on_careers_page"/>
+          <include name="user_enters_in_the_role_title_field"/>
+          <include name="user_entered_keyword_in_the_search_bar"/>
+          <include name="user_launches_the_deutsche_bank_website"/>
+          <include name="user_enters_role_title_and_job_keyword_and_clicks_search_button"/>
+          <include name="deutsche_bank_home_page_is_displayed"/>
+        </methods>
+      </class> <!-- StepDefinitions.CareersTests -->
+    </classes>
+  </test> <!-- ChromeTest(failed) -->
+</suite> <!-- Failed suite [Suite] -->
