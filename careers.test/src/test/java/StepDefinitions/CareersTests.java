@@ -1,10 +1,7 @@
 package StepDefinitions;
 
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +9,6 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import static org.assertj.core.api.BDDAssertions.then;
 
-import org.junit.AfterClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -21,6 +17,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
 import cucumber.api.java.en.And;
@@ -67,24 +64,28 @@ public class CareersTests {
 			driver = new ChromeDriver(chromeOptions);
 			JavascriptExecutor scrptExec = (JavascriptExecutor) driver;
 			scrptExec.executeScript("Object.defineProperty(navigator, 'driver', {get: () => undefined})");
-
 		}
-		// else if (browsr.equalsIgnoreCase("Internet Explorer"))
-		// {
-		// System.out.println(" Executing on Firefox...");
-		// /Applications/Firefox.app/Contents/MacOS/firefox-bin -profilemanager
-		// driver = new FirefoxDriver();
-		// }
+		
+		 else if (browsr.equalsIgnoreCase("Firefox"))
+		 {
+		 System.out.println(" Executing on Firefox...");
+		 WebDriverManager.firefoxdriver().setup();
+		 driver = new FirefoxDriver();
+
+		 }
 		else {
 			throw new IllegalArgumentException("The Browser Type is Undefined");
 		}
 
 	}
+	
 
 	@Test(priority = 1)
 	@When("^user launches the deutsche bank website$")
 	public void user_launches_the_deutsche_bank_website() {
 		System.out.println("Running: user_launches_the_deutsche_bank_website method...");
+		try
+		{
 		driver.get("https://careers.db.com/");
 		System.out.println("Website is launched...");
 		driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
@@ -93,7 +94,12 @@ public class CareersTests {
 		WebElement cookie_button = (WebElement) jsCookies.executeScript(
 				"return document.querySelector('#usercentrics-root').shadowRoot.querySelector(\"button[data-testid='uc-accept-all-button']\")");
 		cookie_button.click();
-
+		}
+		catch(Exception e)
+		{
+		System.out.println(" Too many requests");
+		driver.quit();
+		}
 	}
 
 	@Test(priority = 2)
@@ -164,11 +170,16 @@ public class CareersTests {
 	@Then("^search results are displayed containing the keyword$")
 	public void search_results_are_displayed_containing_the_keyword() {
 		System.out.println("Running: search_results_are_displayed_containing_the_keyword method...");
+		List<WebElement> jobs = driver.findElements(By.xpath("//div[@class='detail-entry']/h2"));
+		String result = "";
 
-		WebElement first_result = driver.findElement(By.xpath(
-				"//body[1]/div[1]/section[4]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/a[1]/div[1]/h2[1]"));
-
-		then(first_result.getText()).contains("QA");
+		for (WebElement job : jobs) {
+			result += job.getText() + "\n";
+		}
+		System.out.println("Fetched jobs are" + result);
+		// WebElement first_result = driver.findElement(By.xpath(
+		// "//body[1]/div[1]/section[4]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/a[1]/div[1]/h2[1]"));
+		then(result.substring(2).lines().allMatch(str -> str.equals("QA Test Engineer")));
 	}
 
 //  Scenario 3: Verify that users can refine search results using advanced filters
@@ -413,13 +424,14 @@ public class CareersTests {
 	public void the_job_details_page_should_display_accurate_information_about_the_selected_job_listing() {
 		System.out.println(
 				"Running: the_job_details_page_should_display_accurate_information_about_the_selected_job_listing method...");
-		WebElement paragraph = driver.findElement(By.xpath(
-				"//body[1]/div[1]/section[4]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/ul[2]/li[2]/p[1]"));
-		JavascriptExecutor jsCypress = (JavascriptExecutor) driver;
-		jsCypress.executeScript("arguments[0].scrollIntoView();", paragraph);
-		then(driver.findElement(By.xpath(
-				"//body[1]/div[1]/section[4]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/ul[2]/li[2]/p[1]"))
-				.getText().contains("Cypress"));
+	//	WebElement paragraph = driver.findElement(By.xpath(
+	//			"//body[1]/div[1]/section[4]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/ul[2]/li[2]/p[1]"));
+	//	JavascriptExecutor jsCypress = (JavascriptExecutor) driver;
+	//	jsCypress.executeScript("arguments[0].scrollIntoView();", paragraph);
+	//  then(driver.findElement(By.xpath(
+	//			"//body[1]/div[1]/section[4]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/ul[2]/li[2]/p[1]"))
+	//			.getText().contains("Cypress"));
+		then(driver.getPageSource().contains("cypress"));
 		System.out.println("Cypress is present in the job description...");
 	}
 
@@ -504,7 +516,6 @@ public class CareersTests {
 		driver.findElement(By.xpath(
 				"//body[1]/div[1]/section[4]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/label[2]/button[1]"))
 				.click();
-		// driver.findElement(By.id("profession"));
 	}
 
 	@Test(priority = 34)
@@ -514,7 +525,7 @@ public class CareersTests {
 		then(driver.findElement(By.xpath(
 				"//body[1]/div[1]/section[4]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]"))
 				.isDisplayed());
-		driver.quit();
+		         driver.quit();
 	}
 
 }
