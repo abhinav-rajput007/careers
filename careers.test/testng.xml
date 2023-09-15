@@ -2,18 +2,26 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <suite name="Suite" parallel="tests">
-  <test name="ChromeTest">
-	<parameter name="browsr" value="Chrome"/>
+	    <parameter name="SearchString" value="Cypress" />
+    <parameter name="JobID" value="Cucumber" />
+    <parameter name="role" value="SDET" />
+        <parameter name="location" value="New York" />
+            <parameter name="jobType" value="Full time" />
+	<listeners>
+        <listener class-name="StepDefinitions.CustomListeners" />
+    </listeners>
+  <test name="Chrome Test">
+ <parameter name="browser" value="Chrome" />
+
     <classes>
-      <class name="StepDefinitions.CareersTests"/>
+      <class name="StepDefinitions.TestRunner" />
     </classes>
-  </test> <!-- Test -->
-
-	<test name="FireFoxTest">
-	<parameter name="browser" value="Firefox"/>
-  <classes>
-     <class name="StepDefinitions.CareersTests"/>
-   </classes>
   </test>
-
-</suite> <!-- Suite -->
+ <!--  <test name="Firefox Test">
+	  <parameter name="browser" value="Firefox" />
+    <classes>
+      <class name="StepDefinitions.TestRunner" />
+    </classes>
+  </test>  -->
+  
+</suite>

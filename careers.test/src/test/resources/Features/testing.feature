@@ -2,7 +2,7 @@ Feature: feature to test db.com Careers Search functionality
 
 	@SmokeTest @RegressionTest
   Scenario: Launch the website
-    Given 'Chrome' is started
+    Given browser is started
     When user launches the deutsche bank website
     Then deutsche bank home page is displayed
 
@@ -16,7 +16,7 @@ Feature: feature to test db.com Careers Search functionality
 	@RegressionTest @Sanity
   Scenario: Verify that users can refine search results using advanced filters
     Given user is on search roles form
-    When location is set to 'New York' and job type to 'Full time'
+    When location is set to New York and job type to Full Time
     And search button is clicked
     Then job listings should be filtered based on the selected criteria
 
@@ -42,7 +42,7 @@ Feature: feature to test db.com Careers Search functionality
 
 	@RegressionTest @Sanity
   Scenario: Verify that the displayed count of search results matches the actual number of results
-    Given user entered keyword 'Cypress' in the search bar
+    Given user entered keyword Cypress in the search bar
     When user clicks on search button
     Then the count of displayed search results should match the actual number of results
 
@@ -55,8 +55,8 @@ Feature: feature to test db.com Careers Search functionality
 	@SmokeTest @RegressionTest @Sanity
   Scenario: Verify that users can search using advanced keywords and receive relevant results
     Given user navigates to search roles page
-    When user enters 'Cucumber' in the job ID keyword field
-    And user enters 'SDET' in the role title field
+    When user enters Cucumber in the job ID keyword field
+    And user enters SDET in the role title field
     Then relevant job listings that match both keywords should be displayed
   
   @RegressionTest  
