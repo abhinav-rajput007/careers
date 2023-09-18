@@ -1,6 +1,7 @@
 package StepDefinitions;
 
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import java.util.Arrays;
@@ -28,6 +29,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Description;
 
 public class CareersTests {
 	public static WebDriver driver;
@@ -41,7 +43,9 @@ public class CareersTests {
 
 //  Scenario 1: Launch the web site
 	@Test(priority = 0)
+	@Description("Scenario 1: Launch the web site")
 	@Parameters("browser")
+	
 	@Given("browser is started")
 	public void is_started(String browser) {
 		System.out.println("Running: browser_is_started method...");
@@ -129,6 +133,7 @@ public class CareersTests {
 
 //  Scenario 2: Verify if search roles results contains the keyword
 	@Test(priority = 3, dependsOnMethods = "user_launches_the_deutsche_bank_website")
+	@Description("Scenario 2: Verify if search roles results contains the keyword")
 	@Given("^user is on careers page$")
 	public void user_is_on_careers_page() {
 		System.out.println("Running: user_is_on_careers_page method...");
@@ -202,6 +207,7 @@ public class CareersTests {
 
 //  Scenario 3: Verify that users can refine search results using advanced filters
 	@Test(priority = 7, dependsOnMethods = "user_launches_the_deutsche_bank_website")
+	@Description("Scenario 3: Verify that users can refine search results using advanced filters")
 	@Given("user is on search roles form")
 	public void user_is_on_search_roles_form() {
 		System.out.println("Running: user_is_on_search_roles_form method...");
@@ -266,6 +272,7 @@ public class CareersTests {
 
 //	Scenario 4: Verify how the system handles an empty search bar	
 	@Test(priority = 11, dependsOnMethods = "user_launches_the_deutsche_bank_website")
+	@Description("Scenario 4: Verify how the system handles an empty search bar	")
 	@Given("user is on search roles page")
 	public void user_is_on_search_roles_page() {
 		System.out.println("Running: user_is_on_search_roles_page method...");
@@ -318,6 +325,7 @@ public class CareersTests {
 
 //	Scenario 5: Verify the functionality of pagination when search results span multiple pages	
 	@Test(priority = 15, dependsOnMethods = "user_launches_the_deutsche_bank_website")
+    @Description("Scenario 5: Verify the functionality of pagination when search results span multiple pages")
 	@Given("search results are listed in more than one page")
 	public void search_results_are_listed_in_more_than_one_page() {
 		System.out.println("Running: search_results_are_listed_in_more_than_one_page method...");
@@ -359,6 +367,7 @@ public class CareersTests {
 
 //	Scenario 6: Verify the ability to clear a search and return to the default view	
 	@Test(priority = 19, dependsOnMethods = "user_launches_the_deutsche_bank_website")
+	 @Description("Scenario 6: Verify the ability to clear a search and return to the default view")
 	@Given("a search has been performed")
 	public void a_search_has_been_performed() {
 		System.out.println("Running: a_search_has_been_performed method...");
@@ -387,6 +396,7 @@ public class CareersTests {
 
 //	Scenario 7: Verify that the displayed count of search results matches the actual number of results	
 	@Test(priority = 22, dependsOnMethods = "user_launches_the_deutsche_bank_website")
+	 @Description("Scenario 7: Verify that the displayed count of search results matches the actual number of results")
 	@Parameters("SearchString")
 	@Given("user entered keyword Cypress in the search bar")
 	public void user_entered_keyword_in_the_search_bar(String SearchString) {
@@ -424,6 +434,7 @@ public class CareersTests {
 
 //	Scenario 8: Verify that clicking on a search result displays the job details page with accurate information	
 	@Test(priority = 25, dependsOnMethods = "user_launches_the_deutsche_bank_website")
+	@Description("Scenario 8: Verify that clicking on a search result displays the job details page with accurate information	")
 	@Given("a search is performed")
 	public void a_search_is_performed() {
 		System.out.println("Running: a_search_is_performed method...");
@@ -457,6 +468,7 @@ public class CareersTests {
 
 //	Scenario 9: Verify that users can search using advanced keywords and receive relevant results	
 	@Test(priority = 28, dependsOnMethods = "user_launches_the_deutsche_bank_website")
+	@Description("Scenario 9: Verify that users can search using advanced keywords and receive relevant results	")
 	@Given("user navigates to search roles page")
 	public void user_navigates_to_search_roles_page() {
 		System.out.println("Running: user_navigates_to_search_roles_page method...");
@@ -521,8 +533,9 @@ public class CareersTests {
 		System.out.println("Both SDET and Cucumber are present in the job description...");
 
 	}
-
+    //Scenario 10: Verify that Profession option appears when user opts to search by Profession	")
 	@Test(priority = 32, dependsOnMethods = "user_launches_the_deutsche_bank_website")
+	@Description("Scenario 10: Verify that Profession option appears when user opts to search by Profession	")
 	@Given("user is in the search roles page")
 	public void user_is_in_the_search_roles_page() {
 		System.out.println("Running: user_is_in_the_search_roles_page method...");
@@ -550,7 +563,7 @@ public class CareersTests {
 
 	}
 
-	@AfterSuite
+	@AfterTest
 	void tidyUpBrowser() {
 		System.out.println("Closing browser....");
 		driver.quit();

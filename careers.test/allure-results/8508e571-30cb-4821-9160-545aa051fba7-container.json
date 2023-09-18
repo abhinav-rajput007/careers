@@ -1,1 +1,0 @@
-{"uuid":"8508e571-30cb-4821-9160-545aa051fba7","name":"Suite","children":["67d2af4f-67d0-492f-a373-9b3f9a2516a3"],"befores":[],"afters":[{"name":"tidyUpBrowser","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1694766540677,"stop":1694766540872}],"start":1694766514624,"stop":1694766540873}

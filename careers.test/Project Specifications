@@ -1,0 +1,33 @@
+Project Environment:
+- Language: Selenium Java
+- Tools:
+  - Selenium 3.141.59
+  - Cucumber-java 4.4.0
+  - Webdrivermanager 5.4.1
+  - TestNG 7.4.0
+  - Maven 4.0.0
+  - Allure 2.24
+  - AssertJ 3.16.1
+- IDE: Eclipse
+
+Description:
+The Selenium Framework includes Cucumber BDD, TestNG, and JUnit libraries that control the test executions.
+The Cucumber feature file lists the scenarios and test steps that are glued to the StepDefinition class.
+The CustomListeners file contains methods that should get invoked when a specific event happens, currently only configured for a test failure in a specific test case.
+Through the TestRunner file, we can control which types of tests to run, like Smoke/Sanity/Regression.
+
+For Reporting:
+Allure is integrated into the project.
+To download Allure, follow the steps below:
+1. Open terminal
+2. Install Homebrew:
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+3. Install Allure:
+brew install allure
+
+4. Verify successful installation:
+allure --version
+
+To generate reports, navigate to the root directory of the project and run the following command:
+allure serve

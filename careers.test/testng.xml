@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="Suite" parallel="tests">
+<suite name="Suite">
+	<listeners>
+		  <listener class-name="io.qameta.allure.testng.AllureTestNg"/>   
+		 <listener class-name="StepDefinitions.CustomListeners" />  
+    </listeners>
 	    <parameter name="SearchString" value="Cypress" />
     <parameter name="JobID" value="Cucumber" />
     <parameter name="role" value="SDET" />
         <parameter name="location" value="New York" />
             <parameter name="jobType" value="Full time" />
-	<listeners>
-        <listener class-name="StepDefinitions.CustomListeners" />
-    </listeners>
   <test name="Chrome Test">
  <parameter name="browser" value="Chrome" />
 
@@ -17,11 +18,11 @@
       <class name="StepDefinitions.TestRunner" />
     </classes>
   </test>
- <!--  <test name="Firefox Test">
+  <test name="Firefox Test">
 	  <parameter name="browser" value="Firefox" />
     <classes>
       <class name="StepDefinitions.TestRunner" />
     </classes>
-  </test>  -->
+  </test> 
   
 </suite>
