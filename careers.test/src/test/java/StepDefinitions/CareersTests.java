@@ -1,6 +1,5 @@
 package StepDefinitions;
 
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -23,6 +22,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -42,10 +43,10 @@ public class CareersTests {
 	 */
 
 //  Scenario 1: Launch the web site
-	@Test(priority = 0)
+	@Test(priority = 0, groups = "smoke")
 	@Description("Scenario 1: Launch the web site")
 	@Parameters("browser")
-	
+
 	@Given("browser is started")
 	public void is_started(String browser) {
 		System.out.println("Running: browser_is_started method...");
@@ -96,7 +97,7 @@ public class CareersTests {
 		}
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 1, groups = "smoke")
 	@When("^user launches the deutsche bank website$")
 	public void user_launches_the_deutsche_bank_website() {
 		try {
@@ -104,12 +105,12 @@ public class CareersTests {
 			driver.get("https://careers.db.com/");
 			System.out.println("Website is launched...");
 			driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
-		
-			 JavascriptExecutor jsCookies = (JavascriptExecutor) driver; WebElement
-		 cookie_button = (WebElement) jsCookies.executeScript(
-			 "return document.querySelector('#usercentrics-root').shadowRoot.querySelector(\"button[data-testid='uc-accept-all-button']\")");
-			 cookie_button.click(); 
-			 
+
+			JavascriptExecutor jsCookies = (JavascriptExecutor) driver;
+			WebElement cookie_button = (WebElement) jsCookies.executeScript(
+					"return document.querySelector('#usercentrics-root').shadowRoot.querySelector(\"button[data-testid='uc-accept-all-button']\")");
+			cookie_button.click();
+
 //			WebElement shadowHost = driver.findElement(By.cssSelector("div[data-testid='uc-app-container']"));
 //
 //			WebElement buttonWithinShadowDOM = (WebElement) ((JavascriptExecutor) driver).executeScript(
@@ -124,7 +125,7 @@ public class CareersTests {
 		}
 	}
 
-	@Test(priority = 2, dependsOnMethods = "user_launches_the_deutsche_bank_website")
+	@Test(priority = 2, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = "smoke")
 	@Then("^deutsche bank home page is displayed$")
 	public void deutsche_bank_home_page_is_displayed() {
 		System.out.println("Running: deutsche_bank_home_page_is_displayed method...");
@@ -132,7 +133,7 @@ public class CareersTests {
 	}
 
 //  Scenario 2: Verify if search roles results contains the keyword
-	@Test(priority = 3, dependsOnMethods = "user_launches_the_deutsche_bank_website")
+	@Test(priority = 3, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = "smoke")
 	@Description("Scenario 2: Verify if search roles results contains the keyword")
 	@Given("^user is on careers page$")
 	public void user_is_on_careers_page() {
@@ -140,7 +141,7 @@ public class CareersTests {
 		then(driver.findElement(By.xpath("//body[1]/nav[1]/div[1]/ul[1]/li[6]/a[1]")).isDisplayed());
 	}
 
-	@Test(priority = 4, dependsOnMethods = "user_launches_the_deutsche_bank_website")
+	@Test(priority = 4, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = "smoke")
 	@When("^user hovers over professionals nav and clicks on search roles$")
 	public void user_hovers_over_professionals_nav_and_clicks_on_search_roles() {
 		System.out.println("Running: user_hovers_over_professionals_nav_and_clicks_on_search_roles method...");
@@ -166,14 +167,15 @@ public class CareersTests {
 		driver.findElement(By.xpath("//body[1]/nav[2]/div[1]/ul[1]/li[5]/div[1]/section[1]/ul[1]/li[1]/a[1]")).click();
 	}
 
-	@Test(priority = 5, dependsOnMethods = "user_launches_the_deutsche_bank_website")
+	@Test(priority = 5, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = "smoke")
 	@And("^user enters role title and job keyword and clicks search button$")
 	public void user_enters_role_title_and_job_keyword_and_clicks_search_button() {
 		System.out.println("Running: user_enters_role_title_and_job_keyword_and_clicks_search_button method...");
-
-		WebElement jobID_keyword = driver.findElement(By.xpath(
-				"//body[1]/div[1]/section[4]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/input[1]"));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		JavascriptExecutor jsSize = (JavascriptExecutor) driver;
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+
+		WebElement jobID_keyword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#jobIdSearch")));
 		jsSize.executeScript("arguments[0].scrollIntoView();", jobID_keyword);
 		System.out.println("JobID/Keyword textbox is scrolled into view...");
 
@@ -189,7 +191,7 @@ public class CareersTests {
 
 	}
 
-	@Test(priority = 6, dependsOnMethods = "user_launches_the_deutsche_bank_website")
+	@Test(priority = 6, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = "smoke")
 	@Then("^search results are displayed containing the keyword$")
 	public void search_results_are_displayed_containing_the_keyword() {
 		System.out.println("Running: search_results_are_displayed_containing_the_keyword method...");
@@ -215,10 +217,10 @@ public class CareersTests {
 	}
 
 	@Test(priority = 8, dependsOnMethods = "user_launches_the_deutsche_bank_website")
-	@Parameters({"location","jobType"})
+	@Parameters({ "location", "jobType" })
 	@When("location is set to New York and job type to Full Time")
 	public void location_is_set_to_and_job_type_to(String location, String jobType) {
-		System.out.println("Running: location_is_set_to_and_job_type_to method...");
+		System.out.println("Running: location_is_set_to_and_job_type_to " + location);
 		driver.findElement(By.xpath(
 				"//body[1]/div[1]/section[4]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[3]/div[2]/div[1]/div[1]/input[1]"))
 				.click();
@@ -237,7 +239,7 @@ public class CareersTests {
 		new Actions(driver).sendKeys(driver.findElement(By.xpath(
 				"//body[1]/div[1]/section[4]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[2]/div[2]/div[1]/div[1]/input[1]")),
 				jobType).perform();
-		System.out.println("Full time entered into the textbox...");
+		System.out.println(jobType + " is entered into the textbox...");
 
 		new Actions(driver).sendKeys(driver.findElement(By.xpath(
 				"//body[1]/div[1]/section[4]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[2]/div[2]/div[1]/div[1]/input[1]")),
@@ -249,10 +251,14 @@ public class CareersTests {
 	@When("search button is clicked")
 	public void search_button_is_clicked() {
 		System.out.println("Running: search_button_is_clicked method...");
-		WebElement search_button = driver.findElement(By.xpath(
-				"//body[1]/div[1]/section[4]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/button[1]"));
-
+		driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
 		JavascriptExecutor jsSearch = (JavascriptExecutor) driver;
+		jsSearch.executeScript("window.scrollBy(0, arguments[0]);", 20000);
+		WebDriverWait wait = new WebDriverWait(driver,10);
+		
+		
+		WebElement search_button = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//button[contains(text(),'Search')]"))));
+		
 		jsSearch.executeScript("arguments[0].scrollIntoView();", search_button);
 		System.out.println("Search button is scrolled into view...");
 		driver.findElement(By.xpath(
@@ -325,7 +331,7 @@ public class CareersTests {
 
 //	Scenario 5: Verify the functionality of pagination when search results span multiple pages	
 	@Test(priority = 15, dependsOnMethods = "user_launches_the_deutsche_bank_website")
-    @Description("Scenario 5: Verify the functionality of pagination when search results span multiple pages")
+	@Description("Scenario 5: Verify the functionality of pagination when search results span multiple pages")
 	@Given("search results are listed in more than one page")
 	public void search_results_are_listed_in_more_than_one_page() {
 		System.out.println("Running: search_results_are_listed_in_more_than_one_page method...");
@@ -367,7 +373,7 @@ public class CareersTests {
 
 //	Scenario 6: Verify the ability to clear a search and return to the default view	
 	@Test(priority = 19, dependsOnMethods = "user_launches_the_deutsche_bank_website")
-	 @Description("Scenario 6: Verify the ability to clear a search and return to the default view")
+	@Description("Scenario 6: Verify the ability to clear a search and return to the default view")
 	@Given("a search has been performed")
 	public void a_search_has_been_performed() {
 		System.out.println("Running: a_search_has_been_performed method...");
@@ -396,7 +402,7 @@ public class CareersTests {
 
 //	Scenario 7: Verify that the displayed count of search results matches the actual number of results	
 	@Test(priority = 22, dependsOnMethods = "user_launches_the_deutsche_bank_website")
-	 @Description("Scenario 7: Verify that the displayed count of search results matches the actual number of results")
+	@Description("Scenario 7: Verify that the displayed count of search results matches the actual number of results")
 	@Parameters("SearchString")
 	@Given("user entered keyword Cypress in the search bar")
 	public void user_entered_keyword_in_the_search_bar(String SearchString) {
@@ -445,9 +451,6 @@ public class CareersTests {
 	@When("user clicks on a search result")
 	public void user_clicks_on_a_search_result() {
 		System.out.println("Running: user_clicks_on_a_search_result method...");
-		driver.findElement(By.xpath(
-				"//body[1]/div[1]/section[4]/div[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/a[1]/div[1]/h2[1]"))
-				.click();
 	}
 
 	@Test(priority = 27, dependsOnMethods = "user_launches_the_deutsche_bank_website")
@@ -533,7 +536,9 @@ public class CareersTests {
 		System.out.println("Both SDET and Cucumber are present in the job description...");
 
 	}
-    //Scenario 10: Verify that Profession option appears when user opts to search by Profession	")
+
+	// Scenario 10: Verify that Profession option appears when user opts to search
+	// by Profession ")
 	@Test(priority = 32, dependsOnMethods = "user_launches_the_deutsche_bank_website")
 	@Description("Scenario 10: Verify that Profession option appears when user opts to search by Profession	")
 	@Given("user is in the search roles page")

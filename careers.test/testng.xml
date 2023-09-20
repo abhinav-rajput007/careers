@@ -13,7 +13,6 @@
             <parameter name="jobType" value="Full time" />
   <test name="Chrome Test">
  <parameter name="browser" value="Chrome" />
-
     <classes>
       <class name="StepDefinitions.TestRunner" />
     </classes>
