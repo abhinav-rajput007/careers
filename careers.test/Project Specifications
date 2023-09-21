@@ -15,6 +15,17 @@ The Selenium Framework includes Cucumber BDD, TestNG, and JUnit libraries that c
 The Cucumber feature file lists the scenarios and test steps that are glued to the StepDefinition class.
 The CustomListeners file contains methods that should get invoked when a specific event happens, currently only configured for a test failure in a specific test case.
 Through the TestRunner file, we can control which types of tests to run, like Smoke/Sanity/Regression.
+We can also run Smoke, Sanity and Regression by executing following commands in terminal
+First navigate to the root directory where project is present
+
+To run regression cases
+mvn test -PRegression
+
+To run smoke cases
+mvn test -PSmoke
+
+To run sanity cases
+mvn test -PSanity
 
 For Reporting:
 Allure is integrated into the project.
