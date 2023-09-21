@@ -41,7 +41,7 @@ public class CareersTests {
 	 */
 
 //  Scenario 1: Launch the web site
-	@Test(priority = 0, groups = {"regression","smoke"})
+	@Test(priority = 0, groups = {"regression","smoke","sanity"})
 	@Description("Scenario 1: Launch the web site")
 	@Parameters("browser")
 
@@ -90,7 +90,7 @@ public class CareersTests {
 		}
 	}
 
-	@Test(priority = 1, groups = {"regression","smoke"})
+	@Test(priority = 1, groups = {"regression","smoke","sanity"})
 	@When("^user launches the deutsche bank website$")
 	public void user_launches_the_deutsche_bank_website() {
 		try {
@@ -110,7 +110,7 @@ public class CareersTests {
 		}
 	}
 
-	@Test(priority = 2, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","smoke"})
+	@Test(priority = 2, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","smoke","sanity"})
 	@Then("^deutsche bank home page is displayed$")
 	public void deutsche_bank_home_page_is_displayed() {
 		System.out.println("Running: deutsche_bank_home_page_is_displayed method...");
@@ -118,7 +118,7 @@ public class CareersTests {
 	}
 
 //  Scenario 2: Verify if search roles results contains the keyword
-	@Test(priority = 3, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","smoke"})
+	@Test(priority = 3, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","smoke","sanity"})
 	@Description("Scenario 2: Verify if search roles results contains the keyword")
 	@Given("^user is on careers page$")
 	public void user_is_on_careers_page() {
@@ -126,10 +126,10 @@ public class CareersTests {
 		then(driver.findElement(By.xpath("//body[1]/nav[1]/div[1]/ul[1]/li[6]/a[1]")).isDisplayed());
 	}
 
-	@Test(priority = 4, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","smoke"})
+	@Test(priority = 4, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","smoke","sanity"})
 	@When("^user hovers over professionals nav and clicks on search roles$")
 	public void user_hovers_over_professionals_nav_and_clicks_on_search_roles() {
-		driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
 		System.out.println("Running: user_hovers_over_professionals_nav_and_clicks_on_search_roles method...");
 		WebElement professionals_Nav = driver.findElement(By.xpath("//body[1]/nav[2]/div[1]/ul[1]/li[5]/a[1]"));
 		Actions action_professionals = new Actions(driver);
@@ -153,7 +153,7 @@ public class CareersTests {
 		driver.findElement(By.xpath("//body[1]/nav[2]/div[1]/ul[1]/li[5]/div[1]/section[1]/ul[1]/li[1]/a[1]")).click();
 	}
 
-	@Test(priority = 5, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","smoke"})
+	@Test(priority = 5, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","smoke","sanity"})
 	@And("^user enters role title and job keyword and clicks search button$")
 	public void user_enters_role_title_and_job_keyword_and_clicks_search_button() {
 		System.out.println("Running: user_enters_role_title_and_job_keyword_and_clicks_search_button method...");
@@ -178,7 +178,7 @@ public class CareersTests {
 
 	}
 
-	@Test(priority = 6, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","smoke"})
+	@Test(priority = 6, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","smoke","sanity"})
 	@Then("^search results are displayed containing the keyword$")
 	public void search_results_are_displayed_containing_the_keyword() {
 		System.out.println("Running: search_results_are_displayed_containing_the_keyword method...");
@@ -193,7 +193,7 @@ public class CareersTests {
 	}
 
 //  Scenario 3: Verify that users can refine search results using advanced filters
-	@Test(priority = 7, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","smoke"})
+	@Test(priority = 7, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","smoke","sanity"})
 	@Description("Scenario 3: Verify that users can refine search results using advanced filters")
 	@Given("user is on search roles form")
 	public void user_is_on_search_roles_form() {
@@ -232,7 +232,7 @@ public class CareersTests {
 
 	}
 
-	@Test(priority = 9, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","smoke"})
+	@Test(priority = 9, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","smoke","sanity"})
 	@When("search button is clicked")
 	public void search_button_is_clicked() {
 		System.out.println("Running: search_button_is_clicked method...");
@@ -251,7 +251,7 @@ public class CareersTests {
 				.click();
 	}
 
-	@Test(priority = 10, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","smoke"})
+	@Test(priority = 10, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","smoke","sanity"})
 	@Then("job listings should be filtered based on the selected criteria")
 	public void job_listings_should_be_filtered_based_on_the_selected_criteria() {
 		System.out.println("Running: job_listings_should_be_filtered_based_on_the_selected_criteria method...");
@@ -262,7 +262,7 @@ public class CareersTests {
 	}
 
 //	Scenario 4: Verify how the system handles an empty search bar	
-	@Test(priority = 11, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression"})
+	@Test(priority = 11, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","sanity"})
 	@Description("Scenario 4: Verify how the system handles an empty search bar	")
 	@Given("user is on search roles page")
 	public void user_is_on_search_roles_page() {
@@ -273,7 +273,7 @@ public class CareersTests {
 
 	}
 
-	@Test(priority = 12, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression"})
+	@Test(priority = 12, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","sanity"})
 	@When("search is left empty")
 	public void search_is_left_empty() {
 		System.out.println("Running: search_is_left_empty method...");
@@ -285,7 +285,7 @@ public class CareersTests {
 		jobID_keyword.clear();
 	}
 
-	@Test(priority = 13, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression"})
+	@Test(priority = 13, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","sanity"})
 	@When("search button is clicked now")
 	public void search_button_is_clicked_now() {
 		System.out.println("Running: search_button_is_clicked_now method...");
@@ -295,7 +295,7 @@ public class CareersTests {
 		System.out.println("Search button is clicked...");
 	}
 
-	@Test(priority = 14, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression"})
+	@Test(priority = 14, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","sanity"})
 	@Then("job listings page should open with jobs listings without any filter")
 	public void job_listings_page_should_open_with_jobs_listings_without_any_filter() {
 		System.out.println("Running: job_listings_page_should_open_with_jobs_listings_without_any_filter method...");
@@ -315,7 +315,7 @@ public class CareersTests {
 	}
 
 //	Scenario 5: Verify the functionality of pagination when search results span multiple pages	
-	@Test(priority = 15, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression"})
+	@Test(priority = 15, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","sanity"})
 	@Description("Scenario 5: Verify the functionality of pagination when search results span multiple pages")
 	@Given("search results are listed in more than one page")
 	public void search_results_are_listed_in_more_than_one_page() {
@@ -326,7 +326,7 @@ public class CareersTests {
 
 	}
 
-	@Test(priority = 16, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression"})
+	@Test(priority = 16, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","sanity"})
 	@When("user scrolls to the bottom of the search results page")
 	public void user_scrolls_to_the_bottom_of_the_search_results_page() {
 		System.out.println("Running: user_scrolls_to_the_bottom_of_the_search_results_page method...");
@@ -338,7 +338,7 @@ public class CareersTests {
 		then(load_more_button.isDisplayed());
 	}
 
-	@Test(priority = 17, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression"})
+	@Test(priority = 17, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","sanity"})
 	@When("user clicks on the next button")
 	public void user_clicks_on_the_next_button() {
 		System.out.println("Running: user_clicks_on_the_next_button method...");
@@ -347,7 +347,7 @@ public class CareersTests {
 				.click();
 	}
 
-	@Test(priority = 18, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression"})
+	@Test(priority = 18, dependsOnMethods = "user_launches_the_deutsche_bank_website", groups = {"regression","sanity"})
 	@Then("next page of search results should be displayed")
 	public void next_page_of_search_results_should_be_displayed() {
 		System.out.println("Running: next_page_of_search_results_should_be_displayed method...");
@@ -546,7 +546,7 @@ public class CareersTests {
 
 	}
 
-	@AfterTest
+	@AfterTest(groups = {"regression","smoke","sanity"})
 	void tidyUpBrowser() {
 		System.out.println("Closing browser....");
 		driver.quit();
